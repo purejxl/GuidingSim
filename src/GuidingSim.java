@@ -3,6 +3,8 @@ import Model.Vertex;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,8 +16,14 @@ public class GuidingSim {
     static int[] numberOfPeople = {50, 200, 400, 600, 800, 1000, 1200, 1400, 1600};
     static int[] exeTimes = {100, 200, 300, 500};
 
+    public static String OUTPUT_DIRECTORY = "outputs";
+    public static String OUTPUT_URL = "." + File.separator + OUTPUT_DIRECTORY + File.separator+ "result.xls";
 
     public static void main(String[] args) {
-        new Thread(new SimGuidingTask("./output/result.xls", numberOfPeople, exeTimes)).run();
+        File dirOutput = new File(OUTPUT_DIRECTORY);
+        if (!dirOutput.exists())
+            dirOutput.mkdir();
+
+        new Thread(new SimGuidingTask(OUTPUT_URL, numberOfPeople, exeTimes)).run();
     }
 }
