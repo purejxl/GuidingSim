@@ -1,10 +1,10 @@
 package Model;
 
+import com.sun.istack.internal.Nullable;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by Wood on 2015/8/18.
@@ -96,14 +96,8 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     public static Vertex IE228      =   new Vertex("資電228",     "教授研究室");
     public static Vertex IE229      =   new Vertex("資電229",     "教授研究室");
     public static Vertex IE230      =   new Vertex("資電230",     "低功率系統結構實驗室");
-    public static Vertex IE230_1    =   new Vertex("資電230-1",   "教授研究室");
-    public static Vertex IE230_2    =   new Vertex("資電230-2",   "教授研究室");
     public static Vertex IE231      =   new Vertex("資電231",     "平行與分散式處理實驗室");
-    public static Vertex IE231_1    =   new Vertex("資電231-1",   "教授研究室");
-    public static Vertex IE231_2    =   new Vertex("資電231-2",   "教授研究室");
     public static Vertex IE232      =   new Vertex("資電232",     "行動計算實驗室");
-    public static Vertex IE232_1    =   new Vertex("資電232-1",   "教授研究室");
-    public static Vertex IE232_2    =   new Vertex("資電232-2",   "教授研究室");
     public static Vertex IE233      =   new Vertex("資電233",     "網路管理實驗室");
     public static Vertex IE234      =   new Vertex("資電234",     "院共同實驗室");
     public static Vertex IE235      =   new Vertex("資電235",     "院共同實驗室");
@@ -132,7 +126,9 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     public static Vertex IE255      =   new Vertex("資電255",     "女廁所");
     public static Vertex IE256      =   new Vertex("資電256",     "男廁所");
 
-    public ArrayList<DefaultWeightedEdge> getRoadEdgeList() {
+    private static Graph graph = null;
+
+    public ArrayList<Edge> getRoadEdgeList() {
         return roadEdgeList;
     }
 
@@ -140,24 +136,25 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
         return vertexList;
     }
 
-    public Graph() {
+    public synchronized static Graph getNewInstance() {
+        graph = new Graph();
+        return graph;
+    }
+
+    private Graph() {
         super(DefaultWeightedEdge.class);
         addVertex();
         addEdge();
     }
 
-    public DefaultWeightedEdge addWeightedEdge (Vertex v1, Vertex v2, double weight) {
-//        if (!containsVertex(v1))
-//            addVertex(v1);
-//        if (!containsVertex(v2))
-//            addVertex(v2);
-        DefaultWeightedEdge e = new DefaultWeightedEdge();
+    public Edge addEdge(Vertex v1, Vertex v2, double roadLength, double roadWidth) {
+        Edge e = new Edge(roadLength, roadWidth);
         addEdge(v1, v2, e);
-        setEdgeWeight(e, weight);
+        setEdgeWeight(e, roadLength);
         return e;
     }
 
-    public void modifyWeightedEdge (DefaultWeightedEdge e, double weight) {
+    public void modifyWeightedEdge (Edge e, double weight) {
         setEdgeWeight(e, weight);
     }
 
@@ -170,163 +167,154 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
         return d/100;
     }
 
-    static ArrayList<DefaultWeightedEdge> roadEdgeList;
+    static ArrayList<Edge> roadEdgeList;
     private void addEdge() {
         roadEdgeList = new ArrayList<>();
 
         //CORNER_A to CORNER_B
-        roadEdgeList.add(addWeightedEdge(CORNER_A, NODE1, cmToM(825)));
-        roadEdgeList.add(addWeightedEdge(NODE1, NODE2, cmToM(700)));
-        roadEdgeList.add(addWeightedEdge(NODE2, NODE3, cmToM(700)));
-        roadEdgeList.add(addWeightedEdge(NODE3, CORNER_B, cmToM(875)));
+        roadEdgeList.add(addEdge(CORNER_A, NODE1, cmToM(825), cmToM(175)));
+        roadEdgeList.add(addEdge(NODE1, NODE2, cmToM(700), cmToM(175)));
+        roadEdgeList.add(addEdge(NODE2, NODE3, cmToM(700), cmToM(175)));
+        roadEdgeList.add(addEdge(NODE3, CORNER_B, cmToM(875), cmToM(175)));
         //CORNER_A to CORNER_B
 
         //CORNER_B to CORNER_C
-        roadEdgeList.add(addWeightedEdge(CORNER_B, CORNER_C, cmToM(105000)));
+        roadEdgeList.add(addEdge(CORNER_B, CORNER_C, cmToM(105000), cmToM(175)));
 
         //CORNER_C to CORNER_D
-        roadEdgeList.add(addWeightedEdge(CORNER_C, NODE6, cmToM(525)));
-        roadEdgeList.add(addWeightedEdge(NODE6, NODE5, cmToM(1050)));
-        roadEdgeList.add(addWeightedEdge(NODE5, NODE4, cmToM(1400)));
-        roadEdgeList.add(addWeightedEdge(NODE4, CORNER_D, cmToM(125)));
+        roadEdgeList.add(addEdge(CORNER_C, NODE6, cmToM(525), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE6, NODE5, cmToM(1050), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE5, NODE4, cmToM(1400), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE4, CORNER_D, cmToM(125), cmToM(125)));
         //CORNER_C to CORNER_D
 
         //CORNER_D to CORNER_A
-        roadEdgeList.add(addWeightedEdge(CORNER_D, NODE16, cmToM(525)));
-        roadEdgeList.add(addWeightedEdge(NODE16, CORNER_A, cmToM(525)));
+        roadEdgeList.add(addEdge(CORNER_D, NODE16, cmToM(525), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE16, CORNER_A, cmToM(525), cmToM(125)));
         //CORNER_D to CORNER_A
 
-        roadEdgeList.add(addWeightedEdge(CORNER_D, NODE7, cmToM(575)));
-        roadEdgeList.add(addWeightedEdge(NODE8, CORNER_A, cmToM(525)));
-        roadEdgeList.add(addWeightedEdge(NODE9, NODE8, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE10, NODE9, cmToM(312)));
-        roadEdgeList.add(addWeightedEdge(NODE11, NODE10, cmToM(412.5)));
+        roadEdgeList.add(addEdge(CORNER_D, NODE7, cmToM(575), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE8, CORNER_A, cmToM(525), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE9, NODE8, cmToM(350), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE10, NODE9, cmToM(312), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE11, NODE10, cmToM(412.5), cmToM(76)));
 
-        roadEdgeList.add(addWeightedEdge(CORNER_C, NODE14, cmToM(525)));
-        roadEdgeList.add(addWeightedEdge(NODE14, NODE15, cmToM(350)));
+        roadEdgeList.add(addEdge(CORNER_C, NODE14, cmToM(525), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE14, NODE15, cmToM(350), cmToM(125)));
 
-        roadEdgeList.add(addWeightedEdge(NODE13, CORNER_B, cmToM(175)));
-        roadEdgeList.add(addWeightedEdge(NODE12, NODE13, cmToM(525)));
+        roadEdgeList.add(addEdge(NODE13, CORNER_B, cmToM(175), cmToM(175)));
+        roadEdgeList.add(addEdge(NODE12, NODE13, cmToM(525), cmToM(175)));
 
-        roadEdgeList.add(addWeightedEdge(NODE15, NODE17, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE17, NODE18, cmToM(660)));
-        roadEdgeList.add(addWeightedEdge(NODE18, NODE19, cmToM(700)));
-        roadEdgeList.add(addWeightedEdge(NODE19, NODE20, cmToM(525)));
-        roadEdgeList.add(addWeightedEdge(NODE20, CORNER_E, cmToM(600)));
-        roadEdgeList.add(addWeightedEdge(CORNER_E, NODE24, cmToM(625)));
-        roadEdgeList.add(addWeightedEdge(NODE24, NODE25, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE25, CORNER_F, cmToM(475)));
-        roadEdgeList.add(addWeightedEdge(CORNER_F, NODE26, cmToM(575)));
+        roadEdgeList.add(addEdge(NODE15, NODE17, cmToM(350), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE17, NODE18, cmToM(660), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE18, NODE19, cmToM(700), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE19, NODE20, cmToM(525), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE20, CORNER_E, cmToM(600), cmToM(125)));
+        roadEdgeList.add(addEdge(CORNER_E, NODE24, cmToM(625), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE24, NODE25, cmToM(350), cmToM(125)));
+        roadEdgeList.add(addEdge(NODE25, CORNER_F, cmToM(475), cmToM(125)));
+        roadEdgeList.add(addEdge(CORNER_F, NODE26, cmToM(575), cmToM(125)));
 
-        roadEdgeList.add(addWeightedEdge(CORNER_E, NODE23, cmToM(541)));
-        roadEdgeList.add(addWeightedEdge(NODE23, NODE22, cmToM(1384)));
-        roadEdgeList.add(addWeightedEdge(NODE22, NODE21, cmToM(2198)));
+        roadEdgeList.add(addEdge(CORNER_E, NODE23, cmToM(541), cmToM(62.5)));
+        roadEdgeList.add(addEdge(NODE23, NODE22, cmToM(1384), cmToM(62.5)));
+        roadEdgeList.add(addEdge(NODE22, NODE21, cmToM(2198), cmToM(62.5)));
 
-        roadEdgeList.add(addWeightedEdge(CORNER_F, NODE27, cmToM(333)));
-        roadEdgeList.add(addWeightedEdge(IE206, NODE27, cmToM(125)));
-        roadEdgeList.add(addWeightedEdge(NODE27, CORNER_G, cmToM(375)));
+        roadEdgeList.add(addEdge(CORNER_F, NODE27, cmToM(333), cmToM(125)));
 
-        roadEdgeList.add(addWeightedEdge(CORNER_G, NODE28, cmToM(382.5)));
-        roadEdgeList.add(addWeightedEdge(NODE28, NODE29, cmToM(167)));
-        roadEdgeList.add(addWeightedEdge(NODE29, NODE30, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE30, NODE31, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE31, NODE32, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE32, NODE33, cmToM(350)));
+        roadEdgeList.add(addEdge(NODE28, NODE29, cmToM(167), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE29, NODE30, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE30, NODE31, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE31, NODE32, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE32, NODE33, cmToM(350), cmToM(75)));
 
-        roadEdgeList.add(addWeightedEdge(CORNER_G, NODE34, cmToM(382.5)));
-        roadEdgeList.add(addWeightedEdge(NODE34, NODE35, cmToM(167)));
-        roadEdgeList.add(addWeightedEdge(NODE35, NODE36, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE36, NODE37, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE37, NODE38, cmToM(350)));
-        roadEdgeList.add(addWeightedEdge(NODE38, NODE39, cmToM(350)));
+        roadEdgeList.add(addEdge(NODE34, NODE35, cmToM(167), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE35, NODE36, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE36, NODE37, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE37, NODE38, cmToM(350), cmToM(75)));
+        roadEdgeList.add(addEdge(NODE38, NODE39, cmToM(350), cmToM(75)));
 
-        addWeightedEdge(IE240, NODE11, cmToM(38));
-        addWeightedEdge(IE241, NODE11, cmToM(38));
-        addWeightedEdge(IE239, NODE10, cmToM(38));
-        addWeightedEdge(IE238, NODE10, cmToM(38));
-        addWeightedEdge(IE238, IE238_1, cmToM(412));
+        addEdge(IE206, NODE27, cmToM(125), Double.MAX_VALUE);
+        addEdge(NODE27, CORNER_G, cmToM(375), Double.MAX_VALUE);
+        addEdge(CORNER_G, NODE28, cmToM(382.5), Double.MAX_VALUE);
+        addEdge(CORNER_G, NODE34, cmToM(382.5), Double.MAX_VALUE);
+        addEdge(IE240, NODE11, cmToM(38), Double.MAX_VALUE);
+        addEdge(IE241, NODE11, cmToM(38), Double.MAX_VALUE);
+        addEdge(IE239, NODE10, cmToM(38), Double.MAX_VALUE);
+        addEdge(IE238, NODE10, cmToM(38), Double.MAX_VALUE);
+        addEdge(IE238, IE238_1, cmToM(412), Double.MAX_VALUE);
 
-        addWeightedEdge(IE241_1, NODE9, cmToM(125));
-        addWeightedEdge(STAIR2, NODE8, cmToM(125));
-        addWeightedEdge(IE242, CORNER_A, cmToM(125));
-        addWeightedEdge(IE242_1, NODE16, cmToM(125));
+        addEdge(IE241_1, NODE9, cmToM(125), Double.MAX_VALUE);
+        addEdge(STAIR2, NODE8, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE242, CORNER_A, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE242_1, NODE16, cmToM(125), Double.MAX_VALUE);
 
-        addWeightedEdge(IE252, NODE7, cmToM(125));
-        addWeightedEdge(IE253, NODE7, cmToM(125));
-        addWeightedEdge(IE243, CORNER_D, cmToM(125));
-        addWeightedEdge(IE244, NODE4, cmToM(125));
-        addWeightedEdge(IE245, NODE5, cmToM(125));
-        addWeightedEdge(IE246, NODE5, cmToM(125));
-        addWeightedEdge(IE247, NODE6, cmToM(125));
-        addWeightedEdge(IE248, NODE14, cmToM(125));
-        addWeightedEdge(IE249, NODE14, cmToM(125));
-        addWeightedEdge(STAIR1, NODE15, cmToM(125));
+        addEdge(IE252, NODE7, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE253, NODE7, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE243, CORNER_D, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE244, NODE4, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE245, NODE5, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE246, NODE5, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE247, NODE6, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE248, NODE14, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE249, NODE14, cmToM(125), Double.MAX_VALUE);
+        addEdge(STAIR1, NODE15, cmToM(125), Double.MAX_VALUE);
 
-        addWeightedEdge(IE237, CORNER_C, cmToM(175));
-        addWeightedEdge(IE224, CORNER_C, cmToM(175));
-        addWeightedEdge(IE225, CORNER_B, cmToM(175));
-        addWeightedEdge(IE226, NODE13, cmToM(175));
-        addWeightedEdge(IE227, NODE12, cmToM(175));
-        addWeightedEdge(IE228, NODE12, cmToM(175));
-        addWeightedEdge(IE229, NODE12, cmToM(175));
+        addEdge(IE237, CORNER_C, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE224, CORNER_C, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE225, CORNER_B, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE226, NODE13, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE227, NODE12, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE228, NODE12, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE229, NODE12, cmToM(175), Double.MAX_VALUE);
 
-        addWeightedEdge(IE230, NODE3, cmToM(175));
-        addWeightedEdge(IE230, IE230_1, cmToM(700));
-        addWeightedEdge(IE230, IE230_2, cmToM(700));
-        addWeightedEdge(IE230_1, IE230_2, cmToM(100));
-        addWeightedEdge(IE231, NODE2, cmToM(175));
-        addWeightedEdge(IE231, IE231_1, cmToM(700));
-        addWeightedEdge(IE231, IE231_2, cmToM(700));
-        addWeightedEdge(IE231_1, IE231_2, cmToM(100));
-        addWeightedEdge(IE232, NODE2, cmToM(175));
-        addWeightedEdge(IE232, IE232_1, cmToM(700));
-        addWeightedEdge(IE232, IE232_2, cmToM(700));
-        addWeightedEdge(IE232_1, IE232_2, cmToM(100));
-        addWeightedEdge(IE233, NODE1, cmToM(100));
-        addWeightedEdge(IE234, NODE2, cmToM(100));
-        addWeightedEdge(IE235, NODE2, cmToM(100));
-        addWeightedEdge(IE236, NODE3, cmToM(100));
+        addEdge(IE230, NODE3, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE231, NODE2, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE232, NODE2, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE233, NODE1, cmToM(100), Double.MAX_VALUE);
+        addEdge(IE234, NODE2, cmToM(100), Double.MAX_VALUE);
+        addEdge(IE235, NODE2, cmToM(100), Double.MAX_VALUE);
+        addEdge(IE236, NODE3, cmToM(100), Double.MAX_VALUE);
 
-        addWeightedEdge(IE201, NODE17, cmToM(125));
-        addWeightedEdge(IE201, NODE17, cmToM(125));
-        addWeightedEdge(IE201, IE201_1, cmToM(1010));
-        addWeightedEdge(IE254, NODE17, cmToM(200));
-        addWeightedEdge(ELEVATOR_A, NODE17, cmToM(200));
-        addWeightedEdge(IE222A, NODE18, cmToM(200));
-        addWeightedEdge(ELEVATOR_B, NODE18, cmToM(200));
-        addWeightedEdge(IE223, NODE18, cmToM(125));
-        addWeightedEdge(IE222, NODE19, cmToM(200));
-        addWeightedEdge(IE222, NODE21, cmToM(1500));
-        addWeightedEdge(IE222, NODE22, cmToM(1500));
-        addWeightedEdge(IE221, NODE20, cmToM(125));
-        addWeightedEdge(IE202, NODE20, cmToM(125));
-        addWeightedEdge(IE202, IE202_1, cmToM(175));
-        addWeightedEdge(IE203, CORNER_E, cmToM(125));
-        addWeightedEdge(IE220, NODE24, cmToM(125));
-        addWeightedEdge(IE204, NODE25, cmToM(125));
-        addWeightedEdge(IE205, CORNER_F, cmToM(125));
-        addWeightedEdge(IE250, NODE26, cmToM(125));
-        addWeightedEdge(IE251, NODE26, cmToM(125));
+        addEdge(IE201, NODE17, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE201, NODE17, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE201, IE201_1, cmToM(1010), Double.MAX_VALUE);
+        addEdge(IE254, NODE17, cmToM(200), Double.MAX_VALUE);
+        addEdge(ELEVATOR_A, NODE17, cmToM(200), Double.MAX_VALUE);
+        addEdge(IE222A, NODE18, cmToM(200), Double.MAX_VALUE);
+        addEdge(ELEVATOR_B, NODE18, cmToM(200), Double.MAX_VALUE);
+        addEdge(IE223, NODE18, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE222, NODE19, cmToM(200), Double.MAX_VALUE);
+        addEdge(IE222, NODE21, cmToM(1500), Double.MAX_VALUE);
+        addEdge(IE222, NODE22, cmToM(1500), Double.MAX_VALUE);
+        addEdge(IE221, NODE20, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE202, NODE20, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE202, IE202_1, cmToM(175), Double.MAX_VALUE);
+        addEdge(IE203, CORNER_E, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE220, NODE24, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE204, NODE25, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE205, CORNER_F, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE250, NODE26, cmToM(125), Double.MAX_VALUE);
+        addEdge(IE251, NODE26, cmToM(125), Double.MAX_VALUE);
 
-        addWeightedEdge(IE207, CORNER_G, cmToM(167));
-        addWeightedEdge(IE207, IE207_1, cmToM(1400));
+        addEdge(IE207, CORNER_G, cmToM(167), Double.MAX_VALUE);
+        addEdge(IE207, IE207_1, cmToM(1400), Double.MAX_VALUE);
 
-        addWeightedEdge(IE208, NODE28, cmToM(75));
-        addWeightedEdge(IE209, NODE29, cmToM(75));
-        addWeightedEdge(IE210, NODE30, cmToM(75));
-        addWeightedEdge(IE211, NODE31, cmToM(75));
-        addWeightedEdge(IE212, NODE32, cmToM(75));
-        addWeightedEdge(IE213, NODE33, cmToM(75));
+        addEdge(IE208, NODE28, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE209, NODE29, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE210, NODE30, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE211, NODE31, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE212, NODE32, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE213, NODE33, cmToM(75), Double.MAX_VALUE);
 
-        addWeightedEdge(IE207A, NODE34, cmToM(75));
-        addWeightedEdge(IE214, NODE35, cmToM(75));
-        addWeightedEdge(IE215, NODE36, cmToM(75));
-        addWeightedEdge(IE216, NODE37, cmToM(75));
-        addWeightedEdge(IE217, NODE38, cmToM(75));
-        addWeightedEdge(IE218, NODE39, cmToM(75));
-        addWeightedEdge(IE219, NODE39, cmToM(75));
+        addEdge(IE207A, NODE34, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE214, NODE35, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE215, NODE36, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE216, NODE37, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE217, NODE38, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE218, NODE39, cmToM(75), Double.MAX_VALUE);
+        addEdge(IE219, NODE39, cmToM(75), Double.MAX_VALUE);
 
-        addWeightedEdge(STAIR3, NODE27, cmToM(382.5));
+        addEdge(STAIR3, NODE27, cmToM(382.5), Double.MAX_VALUE);
     }
 
     static ArrayList<Vertex> vertexList;
@@ -367,14 +355,8 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
         vertexList.add(IE228);
         vertexList.add(IE229);
         vertexList.add(IE230);
-        vertexList.add(IE230_1);
-        vertexList.add(IE230_2);
         vertexList.add(IE231);
-        vertexList.add(IE231_1);
-        vertexList.add(IE231_2);
         vertexList.add(IE232);
-        vertexList.add(IE232_1);
-        vertexList.add(IE232_2);
         vertexList.add(IE233);
         vertexList.add(IE234);
         vertexList.add(IE235);
