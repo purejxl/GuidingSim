@@ -1,5 +1,6 @@
 package Model;
 
+import Main.GuidingSim;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 /**
@@ -7,15 +8,41 @@ import org.jgrapht.graph.DefaultWeightedEdge;
  */
 public class Edge extends DefaultWeightedEdge {
     public int nPeople;
-    public double length;
-    public double width;
-    public double area;
+    private double distance;
+    private double area;
+    private int weightType = 0;
 
     public Edge(double roadLength, double roadWidth) {
+        super();
         nPeople = 0;
-        length = roadLength;
-        width = roadWidth;
+        distance = roadLength;
         area = roadLength * roadWidth;
+    }
+
+    public void setWeightType(int weightType) {
+        this.weightType = weightType;
+    }
+
+    @Override
+    protected double getWeight() {
+        switch (weightType) {
+            case GuidingSim.DISTANSE_BASED:
+                return getDistance();
+            case GuidingSim.TIME_BASED:
+                return getDuration();
+            default:
+                return 1D;
+
+        }
+    }
+
+    public double getDuration() {
+        double density = nPeople / area;
+        return distance / GuidingSim.getPersonVelocity(density);
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
 }

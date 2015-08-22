@@ -7,35 +7,33 @@ import Model.Vertex;
 import jxl.Workbook;
 import jxl.write.*;
 import jxl.write.Number;
+import org.jgrapht.GraphPath;
 import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Wood on 2015/8/19.
  */
 public class runOnDistanceBased implements Runnable {
-    int numOfPeople;
-    int rounds[];
-
-    ArrayList<Graph> graphs;
+    List<Graph> graphs;
     ArrayList<Edge> edges;
     ArrayList<Vertex> vertexes;
     DijkstraShortestPath<Vertex, DefaultWeightedEdge> dijkstra;
+    ArrayList<ArrayList<HashMap<String, Integer>>> randomTravelList;
+    ArrayList<ArrayList<Integer>> randomDeployPeopleList;
 
     String output;
     DecimalFormat df;
 
-    public runOnDistanceBased(ArrayList<Graph> graphs) {
-        this.graphs = new ArrayList<>(graphs);
-        this.numOfPeople = GuidingSim.numberOfPeople.length;
-        this.rounds = GuidingSim.rounds;
+    public runOnDistanceBased() {
+        this.graphs = new ArrayList<>();
         this.output = GuidingSim.DIS_OUTPUT_URL;
+        initialData();
         df = new DecimalFormat("##.00");
     }
 
@@ -43,53 +41,63 @@ public class runOnDistanceBased implements Runnable {
     public void run() {
         try {
             WritableWorkbook workbook = Workbook.createWorkbook(new File(output));
-            WritableSheet sheet = workbook.createSheet("結果", 0);  //工作表名稱
+            WritableSheet timeSheet = workbook.createSheet("結果(時間單位)", 1);  //工作表名稱
+            WritableSheet distanceSheet = workbook.createSheet("結果(距離單位)", 1);  //工作表名稱
             WritableFont myFont = new WritableFont(WritableFont.createFont("微軟正黑體"), 14);
             myFont.setColour(Colour.BLACK);
             WritableCellFormat cellFormat = new WritableCellFormat();
             cellFormat.setFont(myFont); // 指定字型
             cellFormat.setAlignment(Alignment.CENTRE); // 對齊方式
 
-            Label numOfPeople = new Label(0, 0, "人數", cellFormat);
+            timeSheet.addCell(new Label(0, 0, "人數", cellFormat));
+            distanceSheet.addCell(new Label(0, 0, "人數", cellFormat));
 
-            sheet.addCell(numOfPeople);
-
-            int round;
+            double totalDuration = 0;
             double totalDistance = 0;
-            double avgDistance;
             double avgDuration;
+            double avgDistance;
 
-            for (int i = 0 ; i < rounds.length ; i++) {
-                round = this.rounds[i];
-                Label timesOfExeLabel = new Label(i+1, 0, "執行" + this.rounds[i] + "次", cellFormat);
-                sheet.addCell(timesOfExeLabel);
+            for (int i = 0 ; i < randomTravelList.size() ; i++) {
+                timeSheet.addCell(new Label(i+1, 0, "執行" + randomTravelList.get(i).size() + "次", cellFormat));
+                distanceSheet.addCell(new Label(i+1, 0, "執行" + randomTravelList.get(i).size() + "次", cellFormat));
 
 
-                for (int j = 0; j < this.numOfPeople; j++) {
+                for (int j = 0; j < randomDeployPeopleList.size(); j++) {
                     Graph graph = graphs.get(j);
                     edges = graph.getRoadEdgeList();
+                    setWeightType(edges, GuidingSim.DISTANSE_BASED);
                     vertexes = graph.getVertexList();
 
-                    Number numberOfPeopleLabel = new Number(0, j + 1, this.numOfPeople, cellFormat);
-                    sheet.addCell(numberOfPeopleLabel);
 
-                    for (int k = 0 ; k < round ; k++) {
+                    Number tNumberOfPeopleLabel = new Number(0, j + 1, randomDeployPeopleList.get(j).size(), cellFormat);
+                    Number dNumberOfPeopleLabel = new Number(0, j + 1, randomDeployPeopleList.get(j).size(), cellFormat);
+                    timeSheet.addCell(tNumberOfPeopleLabel);
+                    distanceSheet.addCell(dNumberOfPeopleLabel);
 
-                        ArrayList<Double> exeResults = executeDijkstra(graph, round);
+                    ArrayList<Double> exeDistanceResults = executeDijkstra(graph, randomTravelList.get(i)).get(0);
+                    ArrayList<Double> exeDurationResults = executeDijkstra(graph, randomTravelList.get(i)).get(1);
 
-                        for (double d : exeResults) {
-                            totalDistance += d;
-                        }
-
-                        avgDistance = totalDistance / exeResults.size();
-                        avgDuration = avgDistance / GuidingSim.getPersonVelocity();
-
-                        Number result = new Number(i+1, j+1, Double.parseDouble(df.format(avgDuration)), cellFormat);
-                        sheet.addCell(result);
-                        totalDistance = 0;
+                    for (double d : exeDurationResults) {
+                        totalDuration += d;
                     }
+
+                    for (double d : exeDistanceResults) {
+                        totalDistance += d;
+                    }
+
+                    avgDuration = totalDuration / exeDurationResults.size();
+                    avgDistance = totalDistance / exeDistanceResults.size();
+
+                    Number timeResult = new Number(i+1, j+1, Double.parseDouble(df.format(avgDuration)), cellFormat);
+                    Number distanceResult = new Number(i+1, j+1, Double.parseDouble(df.format(avgDistance)), cellFormat);
+                    timeSheet.addCell(timeResult);
+                    distanceSheet.addCell(distanceResult);
+
+                    totalDuration = 0;
+                    totalDistance = 0;
+                    exeDistanceResults.clear();
+                    exeDurationResults.clear();
                 }
-                System.out.println(getClass() + " " + round);
             }
 
             workbook.write();     //寫入
@@ -100,21 +108,60 @@ public class runOnDistanceBased implements Runnable {
         }
     }
 
-    private ArrayList<Double> executeDijkstra(Graph graph, int round) {
-        ArrayList<Double> results = new ArrayList<>();
-        Random random = new Random();
-
-        for(int i = 0 ; i < round ; i++) {
-            int start = random.nextInt(edges.size());
-            int end;
-            do {
-                end = random.nextInt(edges.size());
-            } while (start == end);
-
-            dijkstra = new DijkstraShortestPath<>(graph, vertexes.get(start), vertexes.get(end));
-            results.add(dijkstra.getPathLength());
-
+    private void setWeightType(ArrayList<Edge> edges, int type) {
+        for (Edge edge : edges) {
+            edge.setWeightType(type);
         }
+    }
+
+    private ArrayList<ArrayList<Double>> executeDijkstra(Graph graph, ArrayList<HashMap<String, Integer>> randomPosition) {
+        ArrayList<ArrayList<Double>> results = new ArrayList<>();
+        ArrayList<Double> durationResults = new ArrayList<>();
+        ArrayList<Double> distanceResults = new ArrayList<>();
+
+        for (HashMap<String, Integer> position : randomPosition) {
+            double totalDuration = 0;
+            double totalDistance;
+            int start = position.get(GuidingSim.START);
+            int end = position.get(GuidingSim.END);
+            dijkstra = new DijkstraShortestPath<>(graph, vertexes.get(start), vertexes.get(end));
+            GraphPath graphPath = dijkstra.getPath();
+            for (Object edge : graphPath.getEdgeList()) {
+                totalDuration += ((Edge) edge).getDuration();
+            }
+            durationResults.add(totalDuration);
+
+            totalDistance = dijkstra.getPathLength();
+            distanceResults.add(totalDistance);
+        }
+
+        results.add(0, distanceResults);
+        results.add(1, durationResults);
+
         return results;
+    }
+
+    private void initialData() {
+        randomTravelList = GuidingSim.randomTravelList;
+        randomDeployPeopleList = GuidingSim.randomDeployPeopleList;
+        for (ArrayList<Integer> nList : randomDeployPeopleList) {
+            Graph graph = new Graph();
+            deployPeopleOnGraph(graph, nList);
+            graphs.add(graph);
+        }
+    }
+
+    /**
+     *
+     * @param graph the graph
+     * @param positionList the number of people
+     *
+     */
+    private void deployPeopleOnGraph(Graph graph, ArrayList<Integer> positionList) {
+        ArrayList<Edge> edges = graph.getRoadEdgeList();
+        System.out.println(positionList);
+        for (int n : positionList) {
+            edges.get(n).nPeople++;
+        }
     }
 }
