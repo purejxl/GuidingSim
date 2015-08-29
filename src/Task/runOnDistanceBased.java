@@ -74,8 +74,9 @@ public class runOnDistanceBased implements Runnable {
                     timeSheet.addCell(tNumberOfPeopleLabel);
                     distanceSheet.addCell(dNumberOfPeopleLabel);
 
-                    ArrayList<Double> exeDistanceResults = executeDijkstra(graph, randomTravelList.get(i)).get(0);
-                    ArrayList<Double> exeDurationResults = executeDijkstra(graph, randomTravelList.get(i)).get(1);
+                    ArrayList<ArrayList<Double>> results = executeDijkstra(graph, randomTravelList.get(i));
+                    ArrayList<Double> exeDistanceResults = results.get(0);
+                    ArrayList<Double> exeDurationResults = results.get(1);
 
                     for (double d : exeDurationResults) {
                         totalDuration += d;
@@ -159,7 +160,7 @@ public class runOnDistanceBased implements Runnable {
      */
     private void deployPeopleOnGraph(Graph graph, ArrayList<Integer> positionList) {
         ArrayList<Edge> edges = graph.getRoadEdgeList();
-        System.out.println(positionList);
+
         for (int n : positionList) {
             edges.get(n).nPeople++;
         }

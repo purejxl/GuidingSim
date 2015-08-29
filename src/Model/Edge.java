@@ -34,11 +34,13 @@ public class Edge extends DefaultWeightedEdge {
                 return 1D;
 
         }
+
     }
 
     public double getDuration() {
         double density = nPeople / area;
-        return distance / GuidingSim.getPersonVelocity(density);
+        double speed = GuidingSim.getPersonSpeed(density);
+        return distance / speed;
     }
 
     public double getDistance() {

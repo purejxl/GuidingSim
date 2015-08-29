@@ -51,7 +51,6 @@ public class GuidingSim {
         executor.execute(new runOnTimeBased());
 
         executor.shutdown();
-
         while (true) {
             if (executor.isTerminated()) {
                 System.out.println("Finished all threads");
@@ -63,10 +62,10 @@ public class GuidingSim {
 
     /**
      *
-     * @return the velocity of a person randomly in a range between 0.89 m/s and 1.5 m/s
+     * @return the speed of a person randomly in a range between 0.89 m/s and 1.5 m/s
      *
      */
-    public static double getPersonVelocity() {
+    public static double getPersonSpeed() {
 
         //平均老年人步行的速度是3.2 km/h ~ 3.9 km/h，年輕人則為3.75 km/h ~ 5.43 km/h
 //        return randDouble(0.888888889, 1.50833333);
@@ -76,21 +75,22 @@ public class GuidingSim {
     /**
      *
      * @param d the density
-     * @return the velocity(Unit: meter / sec) of a person considering the crowd density, see{@link #getPersonVelocity()}
+     * @return the speed(Unit: meter / sec) of a person considering the crowd density, see{@link #getPersonSpeed()}
      *
      */
-    public static double getPersonVelocity(double d) {
-        return getVelocityByDensity(getPersonVelocity(), d);
+    public static double getPersonSpeed(double d) {
+        return getSpeedByDensity(getPersonSpeed(), d);
+//        return 1.4;
     }
 
     /**
      *
-     * @param v the velocity of a person
+     * @param v the speed of a person
      * @param d the density of people in square meter
-     * @return the velocity of a person considering the crowd density (Unit: meter / sec)
+     * @return the speed of a person considering the crowd density (Unit: meter / sec)
      *
      */
-    private static double getVelocityByDensity(double v, double d) {
+    private static double getSpeedByDensity(double v, double d) {
         double calculatedVelocity;
 
         if (d <= 0.75)
