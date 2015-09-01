@@ -127,12 +127,42 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     final Vertex IE255      =   new Vertex("資電255",     "女廁所");
     final Vertex IE256      =   new Vertex("資電256",     "男廁所");
 
+    final Vertex IE101      =   new Vertex("資電101",     "資訊電機學院會議室");
+    final Vertex IE102      =   new Vertex("資電102",     "教室");
+    final Vertex IE103      =   new Vertex("資電103",     "教室");
+    final Vertex IE104      =   new Vertex("資電104",     "教室");
+    final Vertex IE106      =   new Vertex("資電106",     "國語文教學中心");
+    final Vertex IE107      =   new Vertex("資電107",     "教室");
+    final Vertex IE108      =   new Vertex("資電108",     "語文自學中心教室");
+    final Vertex IE109      =   new Vertex("資電109",     "語文自學中心教室");
+    final Vertex IE110      =   new Vertex("資電110",     "外語教學中心");
+    final Vertex IE119      =   new Vertex("資電119",     "系統維運組");
+    final Vertex IE120      =   new Vertex("資電120",     "OIT網路資料中心");
+    final Vertex IE121      =   new Vertex("資電121",     "PC維修");
+    final Vertex IE122      =   new Vertex("資電122",     "視聽資源辦公室");
+    final Vertex IE123      =   new Vertex("資電123",     "資訊管理中心辦公室(二)");
+    final Vertex IE124      =   new Vertex("資電124",     "資訊管理中心辦公室(一)");
+    final Vertex IE125      =   new Vertex("資電125",     "電腦實習教室");
+    final Vertex IE126      =   new Vertex("資電126",     "男廁所");
+    final Vertex IE127      =   new Vertex("資電127",     "女廁所");
+    final Vertex IE132      =   new Vertex("資電132",     "無障礙廁所");
+    final Vertex IE128      =   new Vertex("資電128",     "女廁所");
+    final Vertex IE129      =   new Vertex("資電129",     "男廁所");
+
     public ArrayList<Edge> getRoadEdgeList() {
         return new ArrayList<>(roadEdgeList);
     }
 
     public ArrayList<Vertex> getVertexList() {
         return new ArrayList<>(vertexList);
+    }
+
+    public int getEdgeSize() {
+        return roadEdgeList.size();
+    }
+
+    public int getVertexSize() {
+        return vertexList.size();
     }
 
     public Graph() {
@@ -307,6 +337,9 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
         insertEdge(IE219, NODE39, cmToM(75), Double.MIN_VALUE);
 
         insertEdge(STAIR3, NODE27, cmToM(382.5), Double.MIN_VALUE);
+
+
+
     }
 
     ArrayList<Vertex> vertexList;
