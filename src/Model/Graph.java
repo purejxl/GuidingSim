@@ -11,57 +11,58 @@ import java.util.ArrayList;
 public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     public static int VERTRX_SIZE = 76;
     public static int EDGE_SIZE = 43;
-    final Vertex CORNER_A   =   new Vertex("轉角A",       "轉角A");
-    final Vertex CORNER_B   =   new Vertex("轉角B",       "轉角B");
-    final Vertex CORNER_C   =   new Vertex("轉角C",       "轉角C");
-    final Vertex CORNER_D   =   new Vertex("轉角D",       "轉角D");
-    final Vertex CORNER_E   =   new Vertex("轉角E",       "轉角E");
-    final Vertex CORNER_F   =   new Vertex("轉角F",       "轉角F");
-    final Vertex CORNER_G   =   new Vertex("轉角G",       "轉角G");
+    final Vertex CORNER_2A  =   new Vertex("轉角2A",      "轉角2A");
+    final Vertex CORNER_2B  =   new Vertex("轉角2B",      "轉角2B");
+    final Vertex CORNER_2C  =   new Vertex("轉角2C",      "轉角2C");
+    final Vertex CORNER_2D  =   new Vertex("轉角2D",      "轉角2D");
+    final Vertex CORNER_2E  =   new Vertex("轉角2E",      "轉角2E");
+    final Vertex CORNER_2F  =   new Vertex("轉角2F",      "轉角2F");
+    final Vertex CORNER_2G  =   new Vertex("轉角2G",      "轉角2G");
     final Vertex ELEVATOR_A =   new Vertex("電梯A",       "電梯A");
     final Vertex ELEVATOR_B =   new Vertex("電梯B",       "電梯B");
-    final Vertex STAIR1     =   new Vertex("樓梯1",       "樓梯1");
-    final Vertex STAIR2     =   new Vertex("樓梯2",       "樓梯2");
-    final Vertex STAIR3     =   new Vertex("樓梯3",       "樓梯3");
-    final Vertex NODE1      =   new Vertex("節點1",       "節點1");
-    final Vertex NODE2      =   new Vertex("節點2",       "節點2");
-    final Vertex NODE3      =   new Vertex("節點3",       "節點3");
-    final Vertex NODE4      =   new Vertex("節點4",       "節點4");
-    final Vertex NODE5      =   new Vertex("節點5",       "節點5");
-    final Vertex NODE6      =   new Vertex("節點6",       "節點6");
-    final Vertex NODE7      =   new Vertex("節點7",       "節點7");
-    final Vertex NODE8      =   new Vertex("節點8",       "節點8");
-    final Vertex NODE9      =   new Vertex("節點9",       "節點9");
-    final Vertex NODE10     =   new Vertex("節點10",      "節點10");
-    final Vertex NODE11     =   new Vertex("節點11",      "節點11");
-    final Vertex NODE12     =   new Vertex("節點12",      "節點12");
-    final Vertex NODE13     =   new Vertex("節點13",      "節點13");
-    final Vertex NODE14     =   new Vertex("節點14",      "節點14");
-    final Vertex NODE15     =   new Vertex("節點15",      "節點15");
-    final Vertex NODE16     =   new Vertex("節點16",      "節點16");
-    final Vertex NODE17     =   new Vertex("節點17",      "節點17");
-    final Vertex NODE18     =   new Vertex("節點18",      "節點18");
-    final Vertex NODE19     =   new Vertex("節點19",      "節點19");
-    final Vertex NODE20     =   new Vertex("節點20",      "節點20");
-    final Vertex NODE21     =   new Vertex("節點21",      "節點21");
-    final Vertex NODE22     =   new Vertex("節點22",      "節點22");
-    final Vertex NODE23     =   new Vertex("節點23",      "節點23");
-    final Vertex NODE24     =   new Vertex("節點24",      "節點24");
-    final Vertex NODE25     =   new Vertex("節點25",      "節點25");
-    final Vertex NODE26     =   new Vertex("節點26",      "節點26");
-    final Vertex NODE27     =   new Vertex("節點27",      "節點27");
-    final Vertex NODE28     =   new Vertex("節點28",      "節點28");
-    final Vertex NODE29     =   new Vertex("節點29",      "節點29");
-    final Vertex NODE30     =   new Vertex("節點30",      "節點30");
-    final Vertex NODE31     =   new Vertex("節點31",      "節點31");
-    final Vertex NODE32     =   new Vertex("節點32",      "節點32");
-    final Vertex NODE33     =   new Vertex("節點33",      "節點33");
-    final Vertex NODE34     =   new Vertex("節點34",      "節點34");
-    final Vertex NODE35     =   new Vertex("節點35",      "節點35");
-    final Vertex NODE36     =   new Vertex("節點36",      "節點36");
-    final Vertex NODE37     =   new Vertex("節點37",      "節點37");
-    final Vertex NODE38     =   new Vertex("節點38",      "節點38");
-    final Vertex NODE39     =   new Vertex("節點39",      "節點39");
+    final Vertex STAIR0201  =   new Vertex("樓梯0201",    "樓梯0201");
+    final Vertex STAIR0202  =   new Vertex("樓梯0202",    "樓梯0202");
+    final Vertex STAIR0203  =   new Vertex("樓梯0203",    "樓梯0203");
+    final Vertex NODE0201   =   new Vertex("節點0201",    "節點0201");
+    final Vertex NODE0202   =   new Vertex("節點0202",    "節點0202");
+    final Vertex NODE0203   =   new Vertex("節點0203",    "節點0203");
+    final Vertex NODE0204   =   new Vertex("節點0204",    "節點0204");
+    final Vertex NODE0205   =   new Vertex("節點0205",    "節點0205");
+    final Vertex NODE0206   =   new Vertex("節點0206",    "節點0206");
+    final Vertex NODE0207   =   new Vertex("節點0207",    "節點0207");
+    final Vertex NODE0208   =   new Vertex("節點0208",    "節點0208");
+    final Vertex NODE0209   =   new Vertex("節點0209",    "節點0209");
+    final Vertex NODE0210   =   new Vertex("節點0210",    "節點0210");
+    final Vertex NODE0211   =   new Vertex("節點0211",    "節點0211");
+    final Vertex NODE0212   =   new Vertex("節點0212",    "節點0212");
+    final Vertex NODE0213   =   new Vertex("節點0213",    "節點0213");
+    final Vertex NODE0214   =   new Vertex("節點0214",    "節點0214");
+    final Vertex NODE0215   =   new Vertex("節點0215",    "節點0215");
+    final Vertex NODE0216   =   new Vertex("節點0216",    "節點0216");
+    final Vertex NODE0217   =   new Vertex("節點0217",    "節點0217");
+    final Vertex NODE0218   =   new Vertex("節點0218",    "節點0218");
+    final Vertex NODE0219   =   new Vertex("節點0219",    "節點0219");
+    final Vertex NODE0220   =   new Vertex("節點0220",    "節點0220");
+    final Vertex NODE0221   =   new Vertex("節點0221",    "節點0221");
+    final Vertex NODE0222   =   new Vertex("節點0222",    "節點0222");
+    final Vertex NODE0223   =   new Vertex("節點0223",    "節點0223");
+    final Vertex NODE0224   =   new Vertex("節點0224",    "節點0224");
+    final Vertex NODE0225   =   new Vertex("節點0225",    "節點0225");
+    final Vertex NODE0226   =   new Vertex("節點0226",    "節點0226");
+    final Vertex NODE0227   =   new Vertex("節點0227",    "節點0227");
+    final Vertex NODE0228   =   new Vertex("節點0228",    "節點0228");
+    final Vertex NODE0229   =   new Vertex("節點0229",    "節點0229");
+    final Vertex NODE0230   =   new Vertex("節點0230",    "節點0230");
+    final Vertex NODE0231   =   new Vertex("節點0231",    "節點0231");
+    final Vertex NODE0232   =   new Vertex("節點0232",    "節點0232");
+    final Vertex NODE0233   =   new Vertex("節點0233",    "節點0233");
+    final Vertex NODE0234   =   new Vertex("節點0234",    "節點0234");
+    final Vertex NODE0235   =   new Vertex("節點0235",    "節點0235");
+    final Vertex NODE0236   =   new Vertex("節點0236",    "節點0236");
+    final Vertex NODE0237   =   new Vertex("節點0237",    "節點0237");
+    final Vertex NODE0238   =   new Vertex("節點0238",    "節點0238");
+    final Vertex NODE0239   =   new Vertex("節點0239",    "節點0239");
+
     final Vertex IE201      =   new Vertex("資電201",     "資訊系辦公室");
     final Vertex IE201_1    =   new Vertex("資電201-1",   "主任辦公室");
     final Vertex IE202      =   new Vertex("資電202",     "資電學院辦公室");
@@ -145,9 +146,9 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     final Vertex IE125      =   new Vertex("資電125",     "電腦實習教室");
     final Vertex IE126      =   new Vertex("資電126",     "男廁所");
     final Vertex IE127      =   new Vertex("資電127",     "女廁所");
-    final Vertex IE132      =   new Vertex("資電132",     "無障礙廁所");
-    final Vertex IE128      =   new Vertex("資電128",     "女廁所");
-    final Vertex IE129      =   new Vertex("資電129",     "男廁所");
+    final Vertex IE128      =   new Vertex("資電132",     "無障礙廁所");
+    final Vertex IE129      =   new Vertex("資電128",     "女廁所");
+    final Vertex IE130      =   new Vertex("資電129",     "男廁所");
 
     public ArrayList<Edge> getRoadEdgeList() {
         return new ArrayList<>(roadEdgeList);
@@ -191,152 +192,152 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     private void insertEdge() {
         roadEdgeList = new ArrayList<>();
 
-        //CORNER_A to CORNER_B
-        roadEdgeList.add(insertEdge(CORNER_A, NODE1, cmToM(825), cmToM(175)));
-        roadEdgeList.add(insertEdge(NODE1, NODE2, cmToM(700), cmToM(175)));
-        roadEdgeList.add(insertEdge(NODE2, NODE3, cmToM(700), cmToM(175)));
-        roadEdgeList.add(insertEdge(NODE3, CORNER_B, cmToM(875), cmToM(175)));
-        //CORNER_A to CORNER_B
+        //CORNER_2A to CORNER_2B
+        roadEdgeList.add(insertEdge(CORNER_2A, NODE0201, cmToM(825), cmToM(175)));
+        roadEdgeList.add(insertEdge(NODE0201, NODE0202, cmToM(700), cmToM(175)));
+        roadEdgeList.add(insertEdge(NODE0202, NODE0203, cmToM(700), cmToM(175)));
+        roadEdgeList.add(insertEdge(NODE0203, CORNER_2B, cmToM(875), cmToM(175)));
+        //CORNER_2A to CORNER_2B
 
-        //CORNER_B to CORNER_C
-        roadEdgeList.add(insertEdge(CORNER_B, CORNER_C, cmToM(105000), cmToM(175)));
+        //CORNER_2B to CORNER_2C
+        roadEdgeList.add(insertEdge(CORNER_2B, CORNER_2C, cmToM(105000), cmToM(175)));
 
-        //CORNER_C to CORNER_D
-        roadEdgeList.add(insertEdge(CORNER_C, NODE6, cmToM(525), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE6, NODE5, cmToM(1050), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE5, NODE4, cmToM(1400), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE4, CORNER_D, cmToM(125), cmToM(125)));
-        //CORNER_C to CORNER_D
+        //CORNER_2C to CORNER_2D
+        roadEdgeList.add(insertEdge(CORNER_2C, NODE0206, cmToM(525), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0206, NODE0205, cmToM(1050), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0205, NODE0204, cmToM(1400), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0204, CORNER_2D, cmToM(125), cmToM(125)));
+        //CORNER_2C to CORNER_2D
 
-        //CORNER_D to CORNER_A
-        roadEdgeList.add(insertEdge(CORNER_D, NODE16, cmToM(525), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE16, CORNER_A, cmToM(525), cmToM(125)));
-        //CORNER_D to CORNER_A
+        //CORNER_2D to CORNER_2A
+        roadEdgeList.add(insertEdge(CORNER_2D, NODE0216, cmToM(525), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0216, CORNER_2A, cmToM(525), cmToM(125)));
+        //CORNER_2D to CORNER_2A
 
-        roadEdgeList.add(insertEdge(CORNER_D, NODE7, cmToM(575), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE8, CORNER_A, cmToM(525), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE9, NODE8, cmToM(350), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE10, NODE9, cmToM(312), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE11, NODE10, cmToM(412.5), cmToM(76)));
+        roadEdgeList.add(insertEdge(CORNER_2D, NODE0207, cmToM(575), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0208, CORNER_2A, cmToM(525), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0209, NODE0208, cmToM(350), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0210, NODE0209, cmToM(312), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0211, NODE0210, cmToM(412.5), cmToM(76)));
 
-        roadEdgeList.add(insertEdge(CORNER_C, NODE14, cmToM(525), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE14, NODE15, cmToM(350), cmToM(125)));
+        roadEdgeList.add(insertEdge(CORNER_2C, NODE0214, cmToM(525), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0214, NODE0215, cmToM(350), cmToM(125)));
 
-        roadEdgeList.add(insertEdge(NODE13, CORNER_B, cmToM(175), cmToM(175)));
-        roadEdgeList.add(insertEdge(NODE12, NODE13, cmToM(525), cmToM(175)));
+        roadEdgeList.add(insertEdge(NODE0213, CORNER_2B, cmToM(175), cmToM(175)));
+        roadEdgeList.add(insertEdge(NODE0212, NODE0213, cmToM(525), cmToM(175)));
 
-        roadEdgeList.add(insertEdge(NODE15, NODE17, cmToM(350), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE17, NODE18, cmToM(660), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE18, NODE19, cmToM(700), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE19, NODE20, cmToM(525), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE20, CORNER_E, cmToM(600), cmToM(125)));
-        roadEdgeList.add(insertEdge(CORNER_E, NODE24, cmToM(625), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE24, NODE25, cmToM(350), cmToM(125)));
-        roadEdgeList.add(insertEdge(NODE25, CORNER_F, cmToM(475), cmToM(125)));
-        roadEdgeList.add(insertEdge(CORNER_F, NODE26, cmToM(575), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0215, NODE0217, cmToM(350), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0217, NODE0218, cmToM(660), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0218, NODE0219, cmToM(700), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0219, NODE0220, cmToM(525), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0220, CORNER_2E, cmToM(600), cmToM(125)));
+        roadEdgeList.add(insertEdge(CORNER_2E, NODE0224, cmToM(625), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0224, NODE0225, cmToM(350), cmToM(125)));
+        roadEdgeList.add(insertEdge(NODE0225, CORNER_2F, cmToM(475), cmToM(125)));
+        roadEdgeList.add(insertEdge(CORNER_2F, NODE0226, cmToM(575), cmToM(125)));
 
-        roadEdgeList.add(insertEdge(CORNER_E, NODE23, cmToM(541), cmToM(62.5)));
-        roadEdgeList.add(insertEdge(NODE23, NODE22, cmToM(1384), cmToM(62.5)));
-        roadEdgeList.add(insertEdge(NODE22, NODE21, cmToM(2198), cmToM(62.5)));
+        roadEdgeList.add(insertEdge(CORNER_2E, NODE0223, cmToM(541), cmToM(62.5)));
+        roadEdgeList.add(insertEdge(NODE0223, NODE0222, cmToM(1384), cmToM(62.5)));
+        roadEdgeList.add(insertEdge(NODE0222, NODE0221, cmToM(2198), cmToM(62.5)));
 
-        roadEdgeList.add(insertEdge(CORNER_F, NODE27, cmToM(333), cmToM(125)));
+        roadEdgeList.add(insertEdge(CORNER_2F, NODE0227, cmToM(333), cmToM(125)));
 
-        roadEdgeList.add(insertEdge(NODE28, NODE29, cmToM(167), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE29, NODE30, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE30, NODE31, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE31, NODE32, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE32, NODE33, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0228, NODE0229, cmToM(167), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0229, NODE0230, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0230, NODE0231, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0231, NODE0232, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0232, NODE0233, cmToM(350), cmToM(75)));
 
-        roadEdgeList.add(insertEdge(NODE34, NODE35, cmToM(167), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE35, NODE36, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE36, NODE37, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE37, NODE38, cmToM(350), cmToM(75)));
-        roadEdgeList.add(insertEdge(NODE38, NODE39, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0234, NODE0235, cmToM(167), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0235, NODE0236, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0236, NODE0237, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0237, NODE0238, cmToM(350), cmToM(75)));
+        roadEdgeList.add(insertEdge(NODE0238, NODE0239, cmToM(350), cmToM(75)));
 
-        insertEdge(IE206, NODE27, cmToM(125), Double.MIN_VALUE);
-        insertEdge(NODE27, CORNER_G, cmToM(375), Double.MIN_VALUE);
-        insertEdge(CORNER_G, NODE28, cmToM(382.5), Double.MIN_VALUE);
-        insertEdge(CORNER_G, NODE34, cmToM(382.5), Double.MIN_VALUE);
-        insertEdge(IE240, NODE11, cmToM(38), Double.MIN_VALUE);
-        insertEdge(IE241, NODE11, cmToM(38), Double.MIN_VALUE);
-        insertEdge(IE239, NODE10, cmToM(38), Double.MIN_VALUE);
-        insertEdge(IE238, NODE10, cmToM(38), Double.MIN_VALUE);
+        insertEdge(IE206, NODE0227, cmToM(125), Double.MIN_VALUE);
+        insertEdge(NODE0227, CORNER_2G, cmToM(375), Double.MIN_VALUE);
+        insertEdge(CORNER_2G, NODE0228, cmToM(382.5), Double.MIN_VALUE);
+        insertEdge(CORNER_2G, NODE0234, cmToM(382.5), Double.MIN_VALUE);
+        insertEdge(IE240, NODE0211, cmToM(38), Double.MIN_VALUE);
+        insertEdge(IE241, NODE0211, cmToM(38), Double.MIN_VALUE);
+        insertEdge(IE239, NODE0210, cmToM(38), Double.MIN_VALUE);
+        insertEdge(IE238, NODE0210, cmToM(38), Double.MIN_VALUE);
         insertEdge(IE238, IE238_1, cmToM(412), Double.MIN_VALUE);
 
-        insertEdge(IE241_1, NODE9, cmToM(125), Double.MIN_VALUE);
-        insertEdge(STAIR2, NODE8, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE242, CORNER_A, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE242_1, NODE16, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE241_1, NODE0209, cmToM(125), Double.MIN_VALUE);
+        insertEdge(STAIR0202, NODE0208, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE242, CORNER_2A, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE242_1, NODE0216, cmToM(125), Double.MIN_VALUE);
 
-        insertEdge(IE252, NODE7, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE253, NODE7, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE243, CORNER_D, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE244, NODE4, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE245, NODE5, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE246, NODE5, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE247, NODE6, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE248, NODE14, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE249, NODE14, cmToM(125), Double.MIN_VALUE);
-        insertEdge(STAIR1, NODE15, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE252, NODE0207, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE253, NODE0207, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE243, CORNER_2D, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE244, NODE0204, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE245, NODE0205, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE246, NODE0205, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE247, NODE0206, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE248, NODE0214, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE249, NODE0214, cmToM(125), Double.MIN_VALUE);
+        insertEdge(STAIR0201, NODE0215, cmToM(125), Double.MIN_VALUE);
 
-        insertEdge(IE237, CORNER_C, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE224, CORNER_C, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE225, CORNER_B, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE226, NODE13, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE227, NODE12, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE228, NODE12, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE229, NODE12, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE237, CORNER_2C, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE224, CORNER_2C, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE225, CORNER_2B, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE226, NODE0213, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE227, NODE0212, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE228, NODE0212, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE229, NODE0212, cmToM(175), Double.MIN_VALUE);
 
-        insertEdge(IE230, NODE3, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE231, NODE2, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE232, NODE2, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE233, NODE1, cmToM(100), Double.MIN_VALUE);
-        insertEdge(IE234, NODE2, cmToM(100), Double.MIN_VALUE);
-        insertEdge(IE235, NODE2, cmToM(100), Double.MIN_VALUE);
-        insertEdge(IE236, NODE3, cmToM(100), Double.MIN_VALUE);
+        insertEdge(IE230, NODE0203, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE231, NODE0202, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE232, NODE0202, cmToM(175), Double.MIN_VALUE);
+        insertEdge(IE233, NODE0201, cmToM(100), Double.MIN_VALUE);
+        insertEdge(IE234, NODE0202, cmToM(100), Double.MIN_VALUE);
+        insertEdge(IE235, NODE0202, cmToM(100), Double.MIN_VALUE);
+        insertEdge(IE236, NODE0203, cmToM(100), Double.MIN_VALUE);
 
-        insertEdge(IE201, NODE17, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE201, NODE17, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE201, NODE0217, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE201, NODE0217, cmToM(125), Double.MIN_VALUE);
         insertEdge(IE201, IE201_1, cmToM(1010), Double.MIN_VALUE);
-        insertEdge(IE254, NODE17, cmToM(200), Double.MIN_VALUE);
-        insertEdge(ELEVATOR_A, NODE17, cmToM(200), Double.MIN_VALUE);
-        insertEdge(IE222A, NODE18, cmToM(200), Double.MIN_VALUE);
-        insertEdge(ELEVATOR_B, NODE18, cmToM(200), Double.MIN_VALUE);
-        insertEdge(IE223, NODE18, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE222, NODE19, cmToM(200), Double.MIN_VALUE);
-        insertEdge(IE222, NODE21, cmToM(1500), Double.MIN_VALUE);
-        insertEdge(IE222, NODE22, cmToM(1500), Double.MIN_VALUE);
-        insertEdge(IE221, NODE20, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE202, NODE20, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE254, NODE0217, cmToM(200), Double.MIN_VALUE);
+        insertEdge(ELEVATOR_A, NODE0217, cmToM(200), Double.MIN_VALUE);
+        insertEdge(IE222A, NODE0218, cmToM(200), Double.MIN_VALUE);
+        insertEdge(ELEVATOR_B, NODE0218, cmToM(200), Double.MIN_VALUE);
+        insertEdge(IE223, NODE0218, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE222, NODE0219, cmToM(200), Double.MIN_VALUE);
+        insertEdge(IE222, NODE0221, cmToM(1500), Double.MIN_VALUE);
+        insertEdge(IE222, NODE0222, cmToM(1500), Double.MIN_VALUE);
+        insertEdge(IE221, NODE0220, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE202, NODE0220, cmToM(125), Double.MIN_VALUE);
         insertEdge(IE202, IE202_1, cmToM(175), Double.MIN_VALUE);
-        insertEdge(IE203, CORNER_E, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE220, NODE24, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE204, NODE25, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE205, CORNER_F, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE250, NODE26, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE251, NODE26, cmToM(125), Double.MIN_VALUE);
-        insertEdge(IE255, NODE23, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE256, NODE23, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE203, CORNER_2E, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE220, NODE0224, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE204, NODE0225, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE205, CORNER_2F, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE250, NODE0226, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE251, NODE0226, cmToM(125), Double.MIN_VALUE);
+        insertEdge(IE255, NODE0223, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE256, NODE0223, cmToM(75), Double.MIN_VALUE);
 
-        insertEdge(IE207, CORNER_G, cmToM(167), Double.MIN_VALUE);
+        insertEdge(IE207, CORNER_2G, cmToM(167), Double.MIN_VALUE);
         insertEdge(IE207, IE207_1, cmToM(1400), Double.MIN_VALUE);
 
-        insertEdge(IE208, NODE28, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE209, NODE29, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE210, NODE30, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE211, NODE31, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE212, NODE32, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE213, NODE33, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE208, NODE0228, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE209, NODE0229, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE210, NODE0230, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE211, NODE0231, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE212, NODE0232, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE213, NODE0233, cmToM(75), Double.MIN_VALUE);
 
-        insertEdge(IE207A, NODE34, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE214, NODE35, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE215, NODE36, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE216, NODE37, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE217, NODE38, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE218, NODE39, cmToM(75), Double.MIN_VALUE);
-        insertEdge(IE219, NODE39, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE207A, NODE0234, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE214, NODE0235, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE215, NODE0236, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE216, NODE0237, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE217, NODE0238, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE218, NODE0239, cmToM(75), Double.MIN_VALUE);
+        insertEdge(IE219, NODE0239, cmToM(75), Double.MIN_VALUE);
 
-        insertEdge(STAIR3, NODE27, cmToM(382.5), Double.MIN_VALUE);
+        insertEdge(STAIR0203, NODE0227, cmToM(382.5), Double.MIN_VALUE);
 
 
 
@@ -409,57 +410,57 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
         vertexList.add(61, insertVertex(IE254));
         vertexList.add(62, insertVertex(IE255));
         vertexList.add(63, insertVertex(IE256));
-        vertexList.add(64, insertVertex(CORNER_A));
-        vertexList.add(65, insertVertex(CORNER_B));
-        vertexList.add(66, insertVertex(CORNER_C));
-        vertexList.add(67, insertVertex(CORNER_D));
-        vertexList.add(68, insertVertex(CORNER_E));
-        vertexList.add(69, insertVertex(CORNER_F));
-        vertexList.add(70, insertVertex(CORNER_G));
-        vertexList.add(71, insertVertex(STAIR1));
-        vertexList.add(72, insertVertex(STAIR2));
-        vertexList.add(73, insertVertex(STAIR3));
+        vertexList.add(64, insertVertex(CORNER_2A));
+        vertexList.add(65, insertVertex(CORNER_2B));
+        vertexList.add(66, insertVertex(CORNER_2C));
+        vertexList.add(67, insertVertex(CORNER_2D));
+        vertexList.add(68, insertVertex(CORNER_2E));
+        vertexList.add(69, insertVertex(CORNER_2F));
+        vertexList.add(70, insertVertex(CORNER_2G));
+        vertexList.add(71, insertVertex(STAIR0201));
+        vertexList.add(72, insertVertex(STAIR0202));
+        vertexList.add(73, insertVertex(STAIR0203));
         vertexList.add(74, insertVertex(ELEVATOR_A));
         vertexList.add(75, insertVertex(ELEVATOR_B));
-        insertVertex(NODE1);
-        insertVertex(NODE2);
-        insertVertex(NODE3);
-        insertVertex(NODE4);
-        insertVertex(NODE5);
-        insertVertex(NODE6);
-        insertVertex(NODE7);
-        insertVertex(NODE8);
-        insertVertex(NODE9);
-        insertVertex(NODE10);
-        insertVertex(NODE11);
-        insertVertex(NODE12);
-        insertVertex(NODE13);
-        insertVertex(NODE14);
-        insertVertex(NODE15);
-        insertVertex(NODE16);
-        insertVertex(NODE17);
-        insertVertex(NODE18);
-        insertVertex(NODE19);
-        insertVertex(NODE20);
-        insertVertex(NODE21);
-        insertVertex(NODE22);
-        insertVertex(NODE23);
-        insertVertex(NODE24);
-        insertVertex(NODE25);
-        insertVertex(NODE26);
-        insertVertex(NODE27);
-        insertVertex(NODE28);
-        insertVertex(NODE29);
-        insertVertex(NODE30);
-        insertVertex(NODE31);
-        insertVertex(NODE32);
-        insertVertex(NODE33);
-        insertVertex(NODE34);
-        insertVertex(NODE35);
-        insertVertex(NODE36);
-        insertVertex(NODE37);
-        insertVertex(NODE38);
-        insertVertex(NODE39);
+        insertVertex(NODE0201);
+        insertVertex(NODE0202);
+        insertVertex(NODE0203);
+        insertVertex(NODE0204);
+        insertVertex(NODE0205);
+        insertVertex(NODE0206);
+        insertVertex(NODE0207);
+        insertVertex(NODE0208);
+        insertVertex(NODE0209);
+        insertVertex(NODE0210);
+        insertVertex(NODE0211);
+        insertVertex(NODE0212);
+        insertVertex(NODE0213);
+        insertVertex(NODE0214);
+        insertVertex(NODE0215);
+        insertVertex(NODE0216);
+        insertVertex(NODE0217);
+        insertVertex(NODE0218);
+        insertVertex(NODE0219);
+        insertVertex(NODE0220);
+        insertVertex(NODE0221);
+        insertVertex(NODE0222);
+        insertVertex(NODE0223);
+        insertVertex(NODE0224);
+        insertVertex(NODE0225);
+        insertVertex(NODE0226);
+        insertVertex(NODE0227);
+        insertVertex(NODE0228);
+        insertVertex(NODE0229);
+        insertVertex(NODE0230);
+        insertVertex(NODE0231);
+        insertVertex(NODE0232);
+        insertVertex(NODE0233);
+        insertVertex(NODE0234);
+        insertVertex(NODE0235);
+        insertVertex(NODE0236);
+        insertVertex(NODE0237);
+        insertVertex(NODE0238);
+        insertVertex(NODE0239);
     }
 
     @Override
