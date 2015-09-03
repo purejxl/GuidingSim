@@ -146,7 +146,6 @@ public class GuidingSim {
             for (int j = 0; j < aPeople; j++) {
                 int position = random.nextInt(bound);
 
-
                 randomPosition.add(position);
             }
             randomPeopleList.add(randomPosition);

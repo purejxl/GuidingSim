@@ -150,6 +150,8 @@ public class Graph extends SimpleWeightedGraph<Vertex, DefaultWeightedEdge> {
     final Vertex IE129      =   new Vertex("資電128",     "女廁所");
     final Vertex IE130      =   new Vertex("資電129",     "男廁所");
 
+
+
     public ArrayList<Edge> getRoadEdgeList() {
         return new ArrayList<>(roadEdgeList);
     }
